@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSS Feed Reader</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>RSS Feed Reader</h1>
+
+    <section id="add-section">
+      <h2>Add Subscription</h2>
+      <form id="add-form">
+        <input
+          type="text"
+          id="url-input"
+          placeholder="https://example.com/feed.xml"
+          aria-label="Feed URL"
+          autocomplete="off"
+        />
+        <button type="submit">Add</button>
+      </form>
+      <p id="error-message" class="error" hidden></p>
+    </section>
+
+    <section id="list-section">
+      <h2>Subscriptions</h2>
+      <ul id="subscription-list"></ul>
+      <p id="empty-message" hidden>No subscriptions yet.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

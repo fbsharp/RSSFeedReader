@@ -33,9 +33,9 @@ Flat single-process layout at repository root (per plan.md "Structure Decision")
 
 **Purpose**: Project initialization and dependency setup
 
-- [ ] T001 Create `package.json` at repository root with `"type": "commonjs"`, `"start": "node server.js"` script, and Node.js 20+ engine field per plan.md Technical Context
-- [ ] T002 [P] Create `.gitignore` at repository root containing `node_modules/` (constitution Principle III; plan.md Constraints)
-- [ ] T003 Add and install the `express` dependency by running `npm install express` from the repository root (only dependency per plan.md "Primary Dependencies")
+- [X] T001 Create `package.json` at repository root with `"type": "commonjs"`, `"start": "node server.js"` script, and Node.js 20+ engine field per plan.md Technical Context
+- [X] T002 [P] Create `.gitignore` at repository root containing `node_modules/` (constitution Principle III; plan.md Constraints)
+- [X] T003 Add and install the `express` dependency by running `npm install express` from the repository root (only dependency per plan.md "Primary Dependencies")
 
 ---
 
@@ -45,12 +45,12 @@ Flat single-process layout at repository root (per plan.md "Structure Decision")
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Create `server.js` at repository root with an Express app that registers `express.json()`, reads the port via `process.env.PORT || 3000`, and starts listening (research.md Decision 5; plan.md Constraints)
-- [ ] T005 In `server.js`, declare the module-level in-memory `subscriptions` array initialized to `[]` (data-model.md "Collection: Subscription List"; FR-002, FR-005)
-- [ ] T006 In `server.js`, register `express.static('public')` AFTER the `/api/` routes are mounted so API paths resolve to JSON, not the HTML page (research.md Decision 5; constitution Principle II)
-- [ ] T007 [P] Create the static shell `public/index.html` with a single page that links `styles.css` and loads `app.js`, served from the same origin (plan.md Project Structure; constitution Principle II)
-- [ ] T008 [P] Create `public/styles.css` with basic styling for the input, add button, and subscription list (plan.md Project Structure)
-- [ ] T009 [P] Create `public/app.js` with an entry point that runs on `DOMContentLoaded` and uses `fetch` with relative URLs only (constitution Principle II; research.md Decision 3)
+- [X] T004 Create `server.js` at repository root with an Express app that registers `express.json()`, reads the port via `process.env.PORT || 3000`, and starts listening (research.md Decision 5; plan.md Constraints)
+- [X] T005 In `server.js`, declare the module-level in-memory `subscriptions` array initialized to `[]` (data-model.md "Collection: Subscription List"; FR-002, FR-005)
+- [X] T006 In `server.js`, register `express.static('public')` AFTER the `/api/` routes are mounted so API paths resolve to JSON, not the HTML page (research.md Decision 5; constitution Principle II)
+- [X] T007 [P] Create the static shell `public/index.html` with a single page that links `styles.css` and loads `app.js`, served from the same origin (plan.md Project Structure; constitution Principle II)
+- [X] T008 [P] Create `public/styles.css` with basic styling for the input, add button, and subscription list (plan.md Project Structure)
+- [X] T009 [P] Create `public/app.js` with an entry point that runs on `DOMContentLoaded` and uses `fetch` with relative URLs only (constitution Principle II; research.md Decision 3)
 
 **Checkpoint**: Server starts cleanly on `http://localhost:3000`, serves `public/`, and holds an empty in-memory list — user story implementation can now begin
 
@@ -64,10 +64,10 @@ Flat single-process layout at repository root (per plan.md "Structure Decision")
 
 ### Implementation for User Story 1
 
-- [ ] T010 [US1] Implement `POST /api/subscriptions` in `server.js`: append `{ url }` to the in-memory array and respond `201` with the created subscription (contracts/subscriptions-api.md POST; FR-001, FR-008)
-- [ ] T011 [US1] Add boundary validation to the `POST /api/subscriptions` handler in `server.js`: reject when `url` is missing, not a string, or empty/whitespace-only (trimmed length 0) with `400 { "error": "url is required" }` (data-model.md Validation Rules; FR-006; constitution Principle III)
-- [ ] T012 [P] [US1] Add the add-subscription UI to `public/index.html`: a text input for the URL and an Add button/form (FR-001)
-- [ ] T013 [US1] Implement the add action in `public/app.js`: on Add, `POST` the trimmed URL via relative `fetch`, then clear/ready the input for the next URL (FR-001, FR-003 of acceptance scenario 3; constitution Principle II)
+- [X] T010 [US1] Implement `POST /api/subscriptions` in `server.js`: append `{ url }` to the in-memory array and respond `201` with the created subscription (contracts/subscriptions-api.md POST; FR-001, FR-008)
+- [X] T011 [US1] Add boundary validation to the `POST /api/subscriptions` handler in `server.js`: reject when `url` is missing, not a string, or empty/whitespace-only (trimmed length 0) with `400 { "error": "url is required" }` (data-model.md Validation Rules; FR-006; constitution Principle III)
+- [X] T012 [P] [US1] Add the add-subscription UI to `public/index.html`: a text input for the URL and an Add button/form (FR-001)
+- [X] T013 [US1] Implement the add action in `public/app.js`: on Add, `POST` the trimmed URL via relative `fetch`, then clear/ready the input for the next URL (FR-001, FR-003 of acceptance scenario 3; constitution Principle II)
 
 **Checkpoint**: User Story 1 is functional — subscriptions can be added via API and UI, and invalid input is rejected
 
@@ -81,10 +81,10 @@ Flat single-process layout at repository root (per plan.md "Structure Decision")
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Implement `GET /api/subscriptions` in `server.js`: return the in-memory array as a JSON array in insertion order, `[]` when empty (contracts/subscriptions-api.md GET; FR-003, FR-005)
-- [ ] T015 [P] [US2] Add the list container element to `public/index.html` for rendering subscriptions (FR-003, FR-005)
-- [ ] T016 [US2] Implement `loadSubscriptions()` render logic in `public/app.js`: `GET` the list via relative `fetch` on load and render each URL into the list container, showing an empty list when none exist (FR-003, FR-005, SC-004)
-- [ ] T017 [US2] In `public/app.js`, re-render the list immediately after a successful add so the new entry appears alongside existing ones (FR-004, FR-008, SC-002, SC-003)
+- [X] T014 [US2] Implement `GET /api/subscriptions` in `server.js`: return the in-memory array as a JSON array in insertion order, `[]` when empty (contracts/subscriptions-api.md GET; FR-003, FR-005)
+- [X] T015 [P] [US2] Add the list container element to `public/index.html` for rendering subscriptions (FR-003, FR-005)
+- [X] T016 [US2] Implement `loadSubscriptions()` render logic in `public/app.js`: `GET` the list via relative `fetch` on load and render each URL into the list container, showing an empty list when none exist (FR-003, FR-005, SC-004)
+- [X] T017 [US2] In `public/app.js`, re-render the list immediately after a successful add so the new entry appears alongside existing ones (FR-004, FR-008, SC-002, SC-003)
 
 **Checkpoint**: User Stories 1 AND 2 both work — the list is visible on load and updates immediately after each add
 
@@ -94,9 +94,9 @@ Flat single-process layout at repository root (per plan.md "Structure Decision")
 
 **Purpose**: Final verification and cleanup across both stories
 
-- [ ] T018 Run the API verification steps in `specs/001-rss-subscriptions-mvp/quickstart.md` (curl: empty list, add, list again, reject empty) and confirm responses match the contract
-- [ ] T019 Run the UI verification steps in `specs/001-rss-subscriptions-mvp/quickstart.md` in a browser, including DevTools Console with no errors on load or add (constitution Principle V; SC-001, SC-005)
-- [ ] T020 [P] Review `server.js` and `public/` for descriptive naming, separated API/storage/view concerns, and no speculative abstractions (constitution Principle I & IV)
+- [X] T018 Run the API verification steps in `specs/001-rss-subscriptions-mvp/quickstart.md` (curl: empty list, add, list again, reject empty) and confirm responses match the contract
+- [X] T019 Run the UI verification steps in `specs/001-rss-subscriptions-mvp/quickstart.md` in a browser, including DevTools Console with no errors on load or add (constitution Principle V; SC-001, SC-005)
+- [X] T020 [P] Review `server.js` and `public/` for descriptive naming, separated API/storage/view concerns, and no speculative abstractions (constitution Principle I & IV)
 
 ---
 
